@@ -1,19 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {
+  createBrowserRouter,
+  Route,
+  RouterProvider,
+  createRoutesFromElements
+} from 'react-router-dom'; // ✅ FIXED: Added missing quotes
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import HomeScreen from './screens/HomeScreen'; // ✅ Ensure correct import name
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route index element={<HomeScreen />} />  {/* ✅ Fixed incorrect casing */}
+    </Route>
+  )
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />  {/* ✅ Fixed incorrect name */}
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Measure performance (optional)
 reportWebVitals();
- 
